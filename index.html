@@ -6,34 +6,36 @@
 <title>Liminaut</title>
 <meta name="description" content="Systems integrate signal over time, build memory into their structure, and give rise to behavior none of their parts could produce alone.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Space+Mono:wght@400;700&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 <style>
 :root {
   --void: #060a06;
   --surface: #0c120c;
-  --panel: #101a10;
   --border: #1a2e1a;
   --copper: #b87333;
   --copper-dim: #6b4220;
   --lumen: #5db87a;
   --lumen-dim: #2a6640;
   --text: #d4ddc8;
-  --text-dim: #6a8a6a;
+  --text-dim: #7a9a7a;
   --text-faint: #334a33;
   --serif: 'Cormorant Garamond', Georgia, serif;
   --mono: 'Space Mono', monospace;
   --body: 'EB Garamond', Georgia, serif;
 }
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
+
 body {
   background: var(--void);
   color: var(--text);
   font-family: var(--body);
-  font-weight: 400;
-  line-height: 1.75;
+  font-size: 19px;
+  line-height: 1.85;
   overflow-x: hidden;
 }
+
 body::before {
   content: '';
   position: fixed;
@@ -42,18 +44,22 @@ body::before {
     linear-gradient(90deg, var(--border) 1px, transparent 1px),
     linear-gradient(0deg, var(--border) 1px, transparent 1px);
   background-size: 48px 48px;
-  opacity: 0.15;
+  opacity: 0.13;
   pointer-events: none;
   z-index: 0;
 }
+
 nav {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 100;
   border-bottom: 1px solid var(--border);
-  background: rgba(6,10,6,0.93);
+  background: rgba(6,10,6,0.92);
   backdrop-filter: blur(12px);
 }
+
 .nav-inner {
   max-width: 1100px;
   margin: 0 auto;
@@ -63,6 +69,7 @@ nav {
   justify-content: space-between;
   height: 52px;
 }
+
 .nav-mark {
   font-family: var(--mono);
   font-size: 0.75rem;
@@ -70,14 +77,16 @@ nav {
   letter-spacing: 0.18em;
   text-decoration: none;
 }
+
 .nav-links {
   display: flex;
   list-style: none;
   flex-wrap: wrap;
 }
+
 .nav-links a {
   font-family: var(--mono);
-  font-size: 0.62rem;
+  font-size: 0.58rem;
   color: var(--text-dim);
   text-decoration: none;
   letter-spacing: 0.1em;
@@ -88,44 +97,63 @@ nav {
   display: block;
   transition: color 0.2s;
 }
+
 .nav-links a:hover { color: var(--lumen); }
-.hero {
-  position: relative;
-  z-index: 1;
-  min-height: 58vh;
+
+/* HERO */
+.site-hero {
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 7rem 2rem 6rem;
+  padding: 8rem 2rem 7rem;
+  position: relative;
+  z-index: 1;
 }
-.hero-inner { max-width: 780px; }
+
+.site-hero-inner { max-width: 780px; }
+
 .hero-eyebrow {
   font-family: var(--mono);
   font-size: 0.65rem;
   color: var(--copper);
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  margin-bottom: 2.2rem;
+  margin-bottom: 2.5rem;
 }
-.hero-eyebrow::before, .hero-eyebrow::after {
+
+.hero-eyebrow::before,
+.hero-eyebrow::after {
   content: '—';
   margin: 0 0.8em;
   color: var(--copper-dim);
 }
+
 .hero-thesis {
   font-family: var(--serif);
   font-style: italic;
   font-weight: 300;
-  font-size: clamp(1.6rem, 3.5vw, 2.3rem);
-  line-height: 1.55;
+  font-size: clamp(1.7rem, 3.8vw, 2.6rem);
+  line-height: 1.5;
   color: var(--text);
-  letter-spacing: 0.01em;
 }
+
 .hero-thesis em {
   color: var(--lumen);
   font-style: normal;
 }
+
+.hero-scroll {
+  margin-top: 3.5rem;
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  color: var(--text-faint);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+/* DIVIDER */
 .divider {
   width: 100%;
   height: 1px;
@@ -133,85 +161,149 @@ nav {
   position: relative;
   z-index: 1;
 }
-.panels-wrap {
-  position: relative;
-  z-index: 1;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-.panels {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
-}
-.panel {
-  background: var(--void);
-  display: flex;
-  flex-direction: column;
-  text-decoration: none;
-  transition: background 0.25s;
-  overflow: hidden;
-}
-.panel:hover { background: var(--surface); }
-.panel-img {
+
+/* SECTION HERO */
+.section-hero {
   width: 100%;
-  height: 190px;
-  object-fit: cover;
-  display: block;
-  filter: brightness(0.5) saturate(0.6);
-  transition: filter 0.35s;
-}
-.panel:hover .panel-img { filter: brightness(0.65) saturate(0.85); }
-.panel-body {
-  padding: 1.8rem 1.6rem 2.2rem;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-.panel-label {
-  font-family: var(--mono);
-  font-size: 0.62rem;
-  color: var(--copper);
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  margin-bottom: 1rem;
+  height: 380px;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  justify-content: center;
+  position: relative;
 }
-.panel-label::after {
+
+.section-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(6,10,6,0.72) 0%,
+    rgba(6,10,6,0.35) 40%,
+    rgba(6,10,6,0.72) 100%
+  );
+}
+
+.section-hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 90px;
+  background: linear-gradient(to bottom, transparent, var(--void));
+}
+
+.section-hero-inner {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 2rem;
+}
+
+.section-num {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-bottom: 0.9rem;
+}
+
+.section-hero h2 {
+  font-family: var(--serif);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 300;
+  color: var(--text);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.7rem;
+  text-shadow: 0 2px 24px rgba(0,0,0,0.9);
+}
+
+.section-hero .hero-caption {
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--text-dim);
+  font-size: 1rem;
+  text-shadow: 0 1px 12px rgba(0,0,0,0.9);
+}
+
+/* SECTION CONTENT */
+.section-content {
+  max-width: 740px;
+  margin: 0 auto;
+  padding: 4rem 2rem 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  color: var(--copper);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  margin-bottom: 1.8rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.section-label::after {
   content: '';
   flex: 1;
   height: 1px;
   background: var(--border);
 }
-.panel-text {
-  font-family: var(--body);
-  font-size: 0.97rem;
+
+.section-content p {
   color: var(--text-dim);
+  font-size: 1rem;
   line-height: 1.9;
-  flex: 1;
+  margin-bottom: 0;
 }
-.panel-enter {
+
+.enter-link {
+  display: inline-block;
+  margin-top: 2rem;
   font-family: var(--mono);
-  font-size: 0.62rem;
+  font-size: 0.6rem;
   color: var(--lumen-dim);
-  letter-spacing: 0.14em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  margin-top: 1.4rem;
-  transition: color 0.2s;
+  text-decoration: none;
+  border: 1px solid var(--border);
+  padding: 0.65rem 1.4rem;
+  transition: all 0.2s;
 }
-.panel:hover .panel-enter { color: var(--lumen); }
+
+.enter-link:hover {
+  border-color: var(--lumen);
+  color: var(--lumen);
+}
+
+/* PROGRESS */
 .progress-wrap {
   position: relative;
   z-index: 1;
   text-align: center;
-  padding: 3.5rem 2rem;
+  padding: 5rem 2rem;
   border-top: 1px solid var(--border);
 }
+
+.progress-eyebrow {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  color: var(--copper);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
 .progress-link {
   font-family: var(--mono);
   font-size: 0.7rem;
@@ -220,11 +312,17 @@ nav {
   text-transform: uppercase;
   text-decoration: none;
   border: 1px solid var(--border);
-  padding: 0.85rem 2.2rem;
+  padding: 0.9rem 2.5rem;
   display: inline-block;
   transition: all 0.2s;
 }
-.progress-link:hover { border-color: var(--copper); color: var(--copper); }
+
+.progress-link:hover {
+  border-color: var(--copper);
+  color: var(--copper);
+}
+
+/* FOOTER */
 footer {
   position: relative;
   z-index: 1;
@@ -232,9 +330,10 @@ footer {
   padding: 2.5rem 2rem;
   text-align: center;
 }
+
 .footer-email {
   font-family: var(--mono);
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   color: var(--text-faint);
   letter-spacing: 0.1em;
   text-decoration: none;
@@ -242,19 +341,23 @@ footer {
   display: block;
   margin-bottom: 0.6rem;
 }
+
 .footer-email:hover { color: var(--lumen); }
+
 .footer-mark {
   font-family: var(--mono);
-  font-size: 0.6rem;
+  font-size: 0.58rem;
   color: var(--text-faint);
   letter-spacing: 0.14em;
 }
+
 .footer-mark span { color: var(--copper-dim); }
+
 @media (max-width: 600px) {
-  .nav-links a { padding: 0 0.5rem; font-size: 0.55rem; }
-  .hero { padding: 5rem 1.2rem 4rem; }
-  .panels-wrap { padding: 0 1rem; }
-  .panels { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .section-hero { background-attachment: scroll; height: 280px; }
+  .site-hero { padding: 6rem 1.2rem 5rem; }
+  .section-content { padding: 3rem 1.2rem 2rem; }
 }
 </style>
 </head>
@@ -264,87 +367,131 @@ footer {
   <div class="nav-inner">
     <a class="nav-mark" href="/">LIMINAUT</a>
     <ul class="nav-links">
-      <li><a href="/plants">Plants</a></li>
-      <li><a href="/water">Water</a></li>
-      <li><a href="/soil">Soil</a></li>
-      <li><a href="/neurons">Neurons</a></li>
-      <li><a href="/computers">Computers</a></li>
-      <li><a href="/threshold">Threshold</a></li>
+      <li><a href="#plants">Plants</a></li>
+      <li><a href="#water">Water</a></li>
+      <li><a href="#soil">Soil</a></li>
+      <li><a href="#neurons">Neurons</a></li>
+      <li><a href="#computers">Computers</a></li>
+      <li><a href="#threshold">Threshold</a></li>
       <li><a href="/progress">Progress</a></li>
     </ul>
   </div>
 </nav>
 
-<section class="hero">
-  <div class="hero-inner">
+<section class="site-hero">
+  <div class="site-hero-inner">
     <p class="hero-eyebrow">Liminaut</p>
     <p class="hero-thesis">Systems integrate signal over time, build memory into their structure, and give rise to behavior <em>none of their parts could produce alone.</em></p>
+    <p class="hero-scroll">↓ scroll</p>
   </div>
 </section>
 
 <div class="divider"></div>
 
-<div class="panels-wrap">
-<div class="panels">
-
-  <a class="panel" href="/plants">
-    <img class="panel-img" src="https://images.unsplash.com/photo-1589984348434-904066a3af4b?q=80&w=1174&auto=format&fit=crop" alt="">
-    <div class="panel-body">
-      <p class="panel-label">Plants</p>
-      <p class="panel-text">A seed carries the accumulated signal of every season its lineage survived in that specific soil, that specific climate, that specific pressure. Domestication optimized for yield and removed the redundancy that made plants locally adaptive. Open pollinated and heritage varieties still carry that full range. Seed saving closes the loop — the plant that performed best in your conditions produces the seed for next season. Companion planting, relay cropping, plants chosen for what the land is already doing rather than what a catalog recommends. The garden that works with its site builds capacity over time. The one optimized for output borrows against it.</p>
-      <p class="panel-enter">Enter →</p>
-    </div>
-  </a>
-
-  <a class="panel" href="/water">
-    <img class="panel-img" src="https://images.unsplash.com/photo-1527066236128-2ff79f7b9705?q=80&w=1176&auto=format&fit=crop" alt="">
-    <div class="panel-body">
-      <p class="panel-label">Water</p>
-      <p class="panel-text">Water moving in a straight line loses dissolved oxygen, warms, and stratifies. A vortex suspends oxygen through the water column, keeps temperature stable through turbulent mixing, and maintains the biological activity that straight flow collapses. Schauberger documented this in mountain streams for decades before fluid dynamics caught up with the observation. Nitrates from a cycled aquarium carry the end product of a complete nitrogen cycle directly to plant roots. Dynamizing restores the spiral motion that pipe infrastructure removes. The constraint was the pipe. The vortex was always what water does when you stop directing it.</p>
-      <p class="panel-enter">Enter →</p>
-    </div>
-  </a>
-
-  <a class="panel" href="/soil">
-    <img class="panel-img" src="https://images.pexels.com/photos/12940879/pexels-photo-12940879.jpeg" alt="">
-    <div class="panel-body">
-      <p class="panel-label">Soil</p>
-      <p class="panel-text">Soil is not a medium. It is a system with memory. Bacterial communities shift in response to what grows above them. Mycelium networks transfer carbon and phosphorus between root systems across distances no single plant manages alone. Biochar creates stable pore architecture that persists through seasons. The rotation matters because the soil remembers the last crop and adjusts. Work against the chemistry and you spend energy fighting a system that has been running longer than agriculture. Read what's already growing and the soil tells you what it's been doing.</p>
-      <p class="panel-enter">Enter →</p>
-    </div>
-  </a>
-
-  <a class="panel" href="/neurons">
-    <img class="panel-img" src="https://images.unsplash.com/photo-1716833322990-acbeae5cc3eb?q=80&w=1329&auto=format&fit=crop" alt="">
-    <div class="panel-body">
-      <p class="panel-label">Neurons</p>
-      <p class="panel-text">A digital simulation models the threshold crossing. An analog circuit built from discrete components instantiates it — the physics isn't approximated, it happens. The noise in a salvaged op-amp isn't an error to correct, it's the biological variance that computational neuroscience spends considerable effort reintroducing artificially. The imprecision of cheap parts turns out to be the range real neurons operate in. The limit was always the point. Spike-timing dependent plasticity, memory as physical change in a synapse, emergence from simple threshold elements — built from salvaged and surplus components figured out in real time.</p>
-      <p class="panel-enter">Enter →</p>
-    </div>
-  </a>
-
-  <a class="panel" href="/computers">
-    <img class="panel-img" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1334&auto=format&fit=crop" alt="">
-    <div class="panel-body">
-      <p class="panel-label">Computers</p>
-      <p class="panel-text">Older hardware runs warm and slow by current benchmarks. 1-bit quantized models like BitNet b1.58 perform near full precision at a fraction of the memory and compute — the constraint becomes the fit. Waste heat from the processor loop routes into heating and cooling solutions rather than exhausting into nothing. Parts chosen for repairability and supply chain transparency over performance scores. LoRa mesh radio for communication that doesn't depend on cellular infrastructure. The limits were always load-bearing. You just have to build around them honestly.</p>
-      <p class="panel-enter">Enter →</p>
-    </div>
-  </a>
-
-  <a class="panel" href="/threshold">
-    <img class="panel-img" src="https://images.unsplash.com/photo-1576290134419-915a21939122?q=80&w=1170&auto=format&fit=crop" alt="">
-    <div class="panel-body">
-      <p class="panel-label">Threshold</p>
-      <p class="panel-text">Scale changes. Substrate changes. The dynamic doesn't. A silicon junction, a firing neuron, a seed reading its soil, a vortex finding its direction — the threshold event is the same gesture repeated across every system that has ever learned anything. Alchemists called it solve et coagula. Neuroscientists call it spike initiation. Farmers call it knowing when to plant. Different languages for the moment a system crosses from one state into another and can't go back. That crossing is what this site keeps returning to.</p>
-      <p class="panel-enter">Enter →</p>
-    </div>
-  </a>
-
+<!-- PLANTS -->
+<div id="plants" class="section-hero" style="background-image: url('https://images.unsplash.com/photo-1589984348434-904066a3af4b?q=80&w=1174&auto=format&fit=crop')">
+  <div class="section-hero-inner">
+    <span class="section-num">I · Plants</span>
+    <h2>What the lineage remembers</h2>
+    <p class="hero-caption">the seed as compressed signal</p>
+  </div>
 </div>
+
+<div class="section-content">
+  <p class="section-label">Plants</p>
+  <p>A seed carries the accumulated signal of every season its lineage survived in that specific soil, that specific climate, that specific pressure. Domestication optimized for yield and removed the redundancy that made plants locally adaptive. Open pollinated and heritage varieties still carry that full range. Seed saving closes the loop — the plant that performed best in your conditions produces the seed for next season. Companion planting, relay cropping, plants chosen for what the land is already doing rather than what a catalog recommends. The garden that works with its site builds capacity over time. The one optimized for output borrows against it.</p>
+  <a class="enter-link" href="/plants">Enter →</a>
 </div>
+
+<div class="divider"></div>
+
+<!-- WATER -->
+<div id="water" class="section-hero" style="background-image: url('https://images.unsplash.com/photo-1527066236128-2ff79f7b9705?q=80&w=1176&auto=format&fit=crop')">
+  <div class="section-hero-inner">
+    <span class="section-num">II · Water</span>
+    <h2>The shape things move through</h2>
+    <p class="hero-caption">medium, memory, vortex</p>
+  </div>
+</div>
+
+<div class="section-content">
+  <p class="section-label">Water</p>
+  <p>Water moving in a straight line loses dissolved oxygen, warms, and stratifies. A vortex suspends oxygen through the water column, keeps temperature stable through turbulent mixing, and maintains the biological activity that straight flow collapses. Schauberger documented this in mountain streams for decades before fluid dynamics caught up with the observation. Nitrates from a cycled aquarium carry the end product of a complete nitrogen cycle directly to plant roots. Dynamizing restores the spiral motion that pipe infrastructure removes. The constraint was the pipe. The vortex was always what water does when you stop directing it.</p>
+  <a class="enter-link" href="/water">Enter →</a>
+</div>
+
+<div class="divider"></div>
+
+<!-- SOIL -->
+<div id="soil" class="section-hero" style="background-image: url('https://images.pexels.com/photos/12940879/pexels-photo-12940879.jpeg')">
+  <div class="section-hero-inner">
+    <span class="section-num">III · Soil</span>
+    <h2>A system with memory</h2>
+    <p class="hero-caption">what the ground has been doing all along</p>
+  </div>
+</div>
+
+<div class="section-content">
+  <p class="section-label">Soil</p>
+  <p>Soil is not a medium. It is a system with memory. Bacterial communities shift in response to what grows above them. Mycelium networks transfer carbon and phosphorus between root systems across distances no single plant manages alone. Biochar creates stable pore architecture that persists through seasons. The rotation matters because the soil remembers the last crop and adjusts. Work against the chemistry and you spend energy fighting a system that has been running longer than agriculture. Read what's already growing and the soil tells you what it's been doing.</p>
+  <a class="enter-link" href="/soil">Enter →</a>
+</div>
+
+<div class="divider"></div>
+
+<!-- NEURONS -->
+<div id="neurons" class="section-hero" style="background-image: url('https://images.unsplash.com/photo-1716833322990-acbeae5cc3eb?q=80&w=1329&auto=format&fit=crop')">
+  <div class="section-hero-inner">
+    <span class="section-num">IV · Neurons</span>
+    <h2>The limit was always the point</h2>
+    <p class="hero-caption">analog threshold, discrete components, real physics</p>
+  </div>
+</div>
+
+<div class="section-content">
+  <p class="section-label">Neurons</p>
+  <p>A digital simulation models the threshold crossing. An analog circuit built from discrete components instantiates it — the physics isn't approximated, it happens. The noise in a salvaged op-amp isn't an error to correct, it's the biological variance that computational neuroscience spends considerable effort reintroducing artificially. The imprecision of cheap parts turns out to be the range real neurons operate in. The limit was always the point. Spike-timing dependent plasticity, memory as physical change in a synapse, emergence from simple threshold elements — built from salvaged and surplus components figured out in real time.</p>
+  <a class="enter-link" href="/neurons">Enter →</a>
+</div>
+
+<div class="divider"></div>
+
+<!-- COMPUTERS -->
+<div id="computers" class="section-hero" style="background-image: url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1334&auto=format&fit=crop')">
+  <div class="section-hero-inner">
+    <span class="section-num">V · Computers</span>
+    <h2>Build around the constraint</h2>
+    <p class="hero-caption">salvaged silicon, honest limits, infrastructure you own</p>
+  </div>
+</div>
+
+<div class="section-content">
+  <p class="section-label">Computers</p>
+  <p>Older hardware runs warm and slow by current benchmarks. 1-bit quantized models like BitNet b1.58 perform near full precision at a fraction of the memory and compute — the constraint becomes the fit. Waste heat from the processor loop routes into heating and cooling solutions rather than exhausting into nothing. Parts chosen for repairability and supply chain transparency over performance scores. LoRa mesh radio for communication that doesn't depend on cellular infrastructure. The limits were always load-bearing. You just have to build around them honestly.</p>
+  <a class="enter-link" href="/computers">Enter →</a>
+</div>
+
+<div class="divider"></div>
+
+<!-- THRESHOLD -->
+<div id="threshold" class="section-hero" style="background-image: url('https://images.unsplash.com/photo-1576290134419-915a21939122?q=80&w=1170&auto=format&fit=crop')">
+  <div class="section-hero-inner">
+    <span class="section-num">VI · Threshold</span>
+    <h2>The crossing itself</h2>
+    <p class="hero-caption">solve et coagula — the between that makes transformation possible</p>
+  </div>
+</div>
+
+<div class="section-content">
+  <p class="section-label">Threshold</p>
+  <p>Scale changes. Substrate changes. The dynamic doesn't. A silicon junction, a firing neuron, a seed reading its soil, a vortex finding its direction — the threshold event is the same gesture repeated across every system that has ever learned anything. Alchemists called it solve et coagula. Neuroscientists call it spike initiation. Farmers call it knowing when to plant. Different languages for the moment a system crosses from one state into another and can't go back. That crossing is what this site keeps returning to.</p>
+  <a class="enter-link" href="/threshold">Enter →</a>
+</div>
+
+<div class="divider"></div>
 
 <div class="progress-wrap">
+  <p class="progress-eyebrow">Field notes</p>
   <a class="progress-link" href="/progress">Progress →</a>
 </div>
 
