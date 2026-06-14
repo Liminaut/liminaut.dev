@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plants — Liminaut</title>
+<meta name="description" content="Every plant in this list is doing at least two jobs. The rotation exists not because any single crop is valuable but because the sequence is.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Space+Mono:wght@400;700&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --void: #060a06;
+  --surface: #0c120c;
+  --border: #1a2e1a;
+  --copper: #b87333;
+  --copper-dim: #6b4220;
+  --lumen: #5db87a;
+  --lumen-dim: #2a6640;
+  --text: #d4ddc8;
+  --text-dim: #7a9a7a;
+  --text-faint: #334a33;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --mono: 'Space Mono', monospace;
+  --body: 'EB Garamond', Georgia, serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--void);
+  background-image: url('https://images.unsplash.com/photo-1706688313379-007de3fd30b2?w=1400&auto=format&fit=crop&q=80');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: var(--body);
+  font-size: 19px;
+  line-height: 1.85;
+  overflow-x: hidden;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  border-bottom: 1px solid var(--border);
+  background: rgba(6,10,6,0.92);
+  backdrop-filter: blur(12px);
+}
+
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 52px;
+}
+
+.nav-mark {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--lumen);
+  letter-spacing: 0.18em;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  flex-wrap: wrap;
+}
+
+.nav-links a {
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  color: var(--text-dim);
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0 0.9rem;
+  border-left: 1px solid var(--border);
+  line-height: 52px;
+  display: block;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--lumen); }
+
+.page-hero {
+  width: 100%;
+  height: 420px;
+  background-image: url('https://images.unsplash.com/photo-1624788999352-7fda58eefb05?w=1400&auto=format&fit=crop&q=80');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-top: 52px;
+}
+
+.page-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(6,10,6,0.85) 0%,
+    rgba(6,10,6,0.45) 40%,
+    rgba(6,10,6,0.85) 100%
+  );
+}
+
+.page-hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(to bottom, transparent, rgba(6,10,6,0.95));
+}
+
+.page-hero-inner {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 2rem;
+}
+
+.page-eyebrow {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  color: var(--copper);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.page-hero h1 {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  color: #f0ede4;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.8rem;
+  text-shadow: 0 2px 30px rgba(0,0,0,1), 0 0 60px rgba(0,0,0,0.9);
+}
+
+.page-hero .hero-caption {
+  font-family: var(--serif);
+  font-style: italic;
+  color: #c8d4b8;
+  font-size: 1rem;
+  text-shadow: 0 1px 16px rgba(0,0,0,1);
+}
+
+.paper {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 5rem 3.5rem 6rem;
+  background: rgba(6,10,6,0.82);
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  min-height: 100vh;
+}
+
+.paper p {
+  color: var(--text-dim);
+  font-size: 1rem;
+  line-height: 1.95;
+  margin-bottom: 1.6rem;
+}
+
+.paper p.opening {
+  color: var(--text);
+}
+
+.paper p.opening::first-letter {
+  font-size: 3.6rem;
+  font-family: var(--serif);
+  float: left;
+  line-height: 0.82;
+  margin: 0.1em 0.1em 0 0;
+  color: var(--copper);
+}
+
+.section-head {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  color: var(--copper);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  margin-top: 3.5rem;
+  margin-bottom: 1.8rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.section-head::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.quick-ref {
+  margin-top: 3.5rem;
+  border-top: 1px solid var(--border);
+  padding-top: 2rem;
+}
+
+.quick-ref-item {
+  font-family: var(--body);
+  font-size: 0.9rem;
+  color: var(--text-faint);
+  line-height: 1.8;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(26,46,26,0.4);
+}
+
+.quick-ref-item span {
+  color: var(--text-dim);
+  font-style: italic;
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 4rem;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  color: var(--text-faint);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid var(--border);
+  padding: 0.65rem 1.4rem;
+  transition: all 0.2s;
+}
+
+.back-link:hover {
+  border-color: var(--lumen);
+  color: var(--lumen);
+}
+
+footer {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--border);
+  padding: 2.5rem 2rem;
+  text-align: center;
+  background: rgba(6,10,6,0.92);
+}
+
+.footer-email {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  color: var(--text-faint);
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  transition: color 0.2s;
+  display: block;
+  margin-bottom: 0.6rem;
+}
+
+.footer-email:hover { color: var(--lumen); }
+
+.footer-mark {
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  color: var(--text-faint);
+  letter-spacing: 0.14em;
+}
+
+.footer-mark span { color: var(--copper-dim); }
+
+@media (max-width: 600px) {
+  .nav-links { display: none; }
+  .page-hero { background-attachment: scroll; height: 280px; }
+  body { background-attachment: scroll; }
+  .paper { padding: 3rem 1.4rem 4rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-mark" href="/">LIMINAUT</a>
+    <ul class="nav-links">
+      <li><a href="/plants">Plants</a></li>
+      <li><a href="/water">Water</a></li>
+      <li><a href="/soil">Soil</a></li>
+      <li><a href="/neurons">Neurons</a></li>
+      <li><a href="/computers">Computers</a></li>
+      <li><a href="/threshold">Threshold</a></li>
+      <li><a href="/progress">Progress</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <p class="page-eyebrow">Liminaut / Plants</p>
+    <h1>What the lineage remembers</h1>
+    <p class="hero-caption">the seed as compressed signal</p>
+  </div>
+</div>
+
+<div class="paper">
+
+  <p class="opening">Every plant in this list is doing at least two jobs. Most are doing three or four. The rotation exists not because any single crop is valuable but because the sequence is. Nitrogen fixed by legumes feeds the grain that follows, grain straw returned as mulch or biochar feeds the soil that receives the next legume, suppression crops clear ground that compaction and weed pressure had locked. Nothing is decorative. Nothing is there for one reason.</p>
+
+  <p>The underlying logic is the same one that runs through every other section of this site. A system working with its own constraints builds capacity over time. A system working against them spends that capacity servicing the friction. Clay soil compacts and holds water and locks nutrients, or it holds mineral charge better than any other substrate, retains moisture through drought, and builds structure when the rotation gives it something to work with. The difference is in the reading.</p>
+
+  <p>What follows is the full plant list, grouped by primary function, with the secondary and tertiary functions noted where they matter most. The sequence at the bottom shows how the groups hand off to each other through the seasons.</p>
+
+  <p class="section-head">Nitrogen Fixers and Soil Builders</p>
+
+  <p>The legumes in this list are doing the heaviest soil work. Cowpea Clay goes in first during the summer heat phase. It germinates in three to four days, reaches flowering in roughly forty days, and contributes around 130 pounds of nitrogen per acre when turned under, while improving soil structure, water infiltration, and water-holding capacity through organic matter incorporation. On a clay site with compaction pressure its taproot physically opens drainage channels that persist after the plant is cut and dropped. Crimson Clover follows as the cool season complement. It can fix up to 150 pounds of nitrogen per acre, provides strong erosion control and weed suppression, and scavenges phosphorus and potassium from deeper in the soil profile. One note worth stating clearly: Crimson Clover performs poorly in heavy waterlogged clay, so it wants ground that has already been opened by the Cowpea phase, not raw compacted clay.</p>
+
+  <p>The three heritage beans, Hidatsa Red Indian, Iroquois Skunk Pole, and the 1500 Year Old Cave Bean, are all nitrogen fixers in the Phaseolus vulgaris family. Hidatsa Red was introduced in 1915 by Oscar Will's Pioneer Indian Collection, coming originally from the Hidatsa people of the upper Missouri River Valley, a variety described even then as a heavy yielder, hardy, and drought resistant. Iroquois Skunk Pole is a vigorous climber selected for exactly the kind of slope and existing vegetation structure this system works with. It will push through cut grass and vetch without babying. All three fix their own nitrogen and don't require additional nitrogen fertilizer, but benefit from moderate potassium and phosphorus, making them ideal successors to a Cowpea or Clover phase that has already built the nitrogen base. The 1500 Year Old Cave Bean carries particular interest for a marginal clay site. Varieties with that kind of lineage were selected across centuries in exactly the difficult conditions that modern bred varieties were optimized away from.</p>
+
+  <p>Soybean Tankuro closes the legume section. Where the beans above are primarily trailing and climbing crops suited to slope and suppression phases, Tankuro is an upright variety contributing high protein biomass and nitrogen to the rotation in a more compact form. Indeterminate and climbing bean cultivars generally show better nodulation and higher nitrogen fixation than determinate bush types, which is worth knowing when sequencing. The pole beans do more soil nitrogen work than the soybeans, which earn their place more through protein yield and biomass than through fixation rate.</p>
+
+  <p>Little Marvel Garden Pea enters in the cool season window before summer heat crops go in. Fast establishing, done before the heat arrives, it fixes nitrogen in a slot that would otherwise sit empty and lose ground to weeds. It is not a heavy hitter on its own but it closes the gap in the rotation calendar that Cowpea cannot fill, and it does it while producing a harvest. The timing is the function.</p>
+
+  <p class="section-head">Grain and Carbohydrate Backbone</p>
+
+  <p>Emmer Farro is the primary grain in this system and the choice over modern wheat varieties is not sentimental. Emmer has been trialed on alluvial black clay loam with 47% clay content and produced the highest hulled grain yield of the ancient wheats tested, heading earlier and carrying higher kernel weight than einkorn or spelt. That is precisely the combination you want on a heavy clay site with a compressed growing season. Fertility and irrigation needs are very low in decent soil, and the crop is frost tolerant with direct sowing in September through October for a spring and early summer harvest. The tall straw is not a byproduct. It is the next layer of the system. Left cut and dropped in place it suppresses the next weed flush. Incorporated into the biochar beds it adds carbon with a mineral profile shaped by whatever the clay gave the plant during growth.</p>
+
+  <p>Barley Black Hulless enters as the relay crop undersown into standing Emmer before harvest. The timing is deliberate. When the Emmer canopy opens at heading the barley seed catches the light gap and establishes roots in soil that the Emmer has already conditioned. When Emmer comes off the barley is already there. It provides continuous ground cover through the transition, preventing the weed rebound that bare soil invites between grain phases. As a hulless variety it also mills and cooks without the dehulling step that makes hulled grains more labor intensive at small scale.</p>
+
+  <p>Corn Country Gentleman Sweet is the vertical infrastructure in the three sisters arrangement. The beans climb the corn stalks, the squash closes the canopy below. Nothing in the three sisters is doing one job. Sorghum residues incorporated into soil aid in the mineralization of nitrogen and enhance nitrogen availability in the rhizosphere, and the corn follows that residue, drawing on a bed that has been chemically prepared for it.</p>
+
+  <p>Sorghum Mennonite is the most multi-functional plant in the entire list. Sorgoleone, the primary allelopathic compound secreted from sorghum root exudates, reaches high concentrations in root hairs at the juvenile stage and has long-term herbicidal activity that persists for up to seven weeks after incorporation into soil. Most broadleaf and grass weeds are susceptible to its herbicidal potential. On a site with established blackberry and aggressive grass pressure this is doing chemical work that no other crop in the list can replicate. Weed density and biomass reductions of 35 to 49% have been documented using sorghum water extracts compared to control groups. Beyond suppression, the massive above-ground biomass cuts and drops as biochar feedstock at the end of the season, the stalks make viable syrup if processed before dry-down, and the grain is a legitimate harvest. Three years of growing sorghum has been shown to result in reduced weediness in the following crop year. This is a plant that changes the field it grows in. One important note: the allelopathic compounds affect the following crops too, which is why a waiting window of three to four weeks after incorporation is necessary before sowing the legume phase.</p>
+
+  <p class="section-head">Suppression and Ground Cover</p>
+
+  <p>The two winter squash varieties, Ayote Green Flesh and Long de Nice, are in the list primarily as canopy crops. Squash plants with their large sprawling leaves create a dense canopy that shades the soil and prevents weeds from germinating and growing. On a clay field that has been through a sorghum smother phase and a legume phase, the squash closes the final gap. That is the summer period when cleared ground is most vulnerable to recolonization. Ayote Green Flesh is a drought tolerant Central American variety that handles heat and irregular moisture well once established, suited to the dry end of a clay soil summer. Long de Nice provides a different maturity window, extending harvest across a longer period and ensuring the suppressive canopy stays intact later into the season. Squash planted adjacent to Corn provides mutual benefit, reduced weed competition for the corn and soil moisture retention from the squash canopy. Both varieties are seed saveable, meaning the suppression function and the food function compound year over year as the seed adapts to the specific site.</p>
+
+  <p>Heirloom Cutting Mix Lettuce is doing a different kind of suppression work at a different scale. Leaf lettuce sown between rows of other crops shades out weeds and can be cut before the primary crop needs the space. It establishes fast in cool conditions, occupies the ground between slower establishing crops during their most vulnerable early weeks, and gets harvested out before it competes. Nothing in the ground between crops is an invitation for weeds. It is an invitation for lettuce. The cutting mix format allows repeated harvests from the same planting without pulling plants, extending the suppressive canopy through the entire cool season window.</p>
+
+  <p>Black Cherry Tomato and Sunrise Bumble Bee Tomato round out the suppression layer, though their mechanism is less immediately obvious than the squash. Tomato foliage contains tomatine and other secondary compounds that suppress certain weed species in the immediate vicinity, and the dense indeterminate growth of both varieties creates genuine canopy suppression when staked and managed. The leaf litter acidifies the soil surface locally, which discourages a different set of weed species than the alkaline-tolerant grasses the Sorghum is working against. Black Cherry is a long season producer with deep roots that improve clay structure over a full growing season. Sunrise Bumble Bee provides a different harvest window and a different color spectrum, which matters for seed saving. Maintaining visible diversity in a population you are selecting from keeps genetic range intact across generations.</p>
+
+  <p class="section-head">Brassica and Root</p>
+
+  <p>The brassica family is doing work in this system that no other plant group replicates. Some brassicas produce large taproots that can penetrate up to six feet to alleviate soil compaction, what agronomists call biodrilling, and as those large taproots decompose they leave channels open to the surface that increase water infiltration and improve subsequent root penetration by the following crop. On a clay field with compaction pressure this is the mechanical intervention the rotation needs, done biologically rather than with equipment.</p>
+
+  <p>Brassicas also produce glucosinolates, chemical compounds that act as natural inhibitors of weed species, and their rapid leafy growth shades the soil quickly, which prevents weed germination before the canopy closes. They are simultaneously drilling the compaction, suppressing weeds chemically, and closing the canopy physically.</p>
+
+  <p>Romanesco Italia Cauliflower is a fall planted crop, started indoors in summer and transplanted into amended ground in August for harvest through winter and early spring. It is a heavy feeder that draws mineral nutrition from depth and concentrates it in edible tissue. What it extracts from the clay comes back to the soil when the plant residue is incorporated. The taproot channel it leaves behind persists through the following season, giving the next crop a pre-drilled path into what was previously compacted ground.</p>
+
+  <p>Kale Blue Curled Scotch occupies the winter ground cover slot that almost nothing else can fill. Plants stand well, maintain color and resist yellowing in cold and heat, making them productive through the full cool season. More importantly for this system, kale left in the ground through winter is actively rooting while other crops are dormant. Its fibrous root mass keeps soil biology active, prevents the surface compaction that freeze-thaw cycles cause on bare clay, and contributes organic matter from leaf drop throughout the season. Harvested by cutting outer leaves rather than pulling plants, it keeps producing until the spring heat forces it to bolt, at which point the flowering stems attract beneficial insects before the plant is cut and dropped as mulch.</p>
+
+  <p class="section-head">The Rotation as Sequence</p>
+
+  <p>Read together the plant list maps a continuous argument across the calendar. The pea fixes nitrogen in the cool gap before summer. Cowpea takes the summer heat slot, smothering weeds and fixing nitrogen while its taproot opens the clay. Sorghum follows where pressure is highest, running its allelopathic chemistry through seven weeks of active suppression and leaving massive biomass for biochar. The waiting window after Sorghum incorporation gives way to the bean phase. Hidatsa Red and Iroquois Skunk Pole climb onto the slope, Cave Bean establishes in the most difficult ground, Tankuro contributes upright biomass to the flat field. Emmer goes in after the legume phase draws down, pulling on the nitrogen the beans left and building the tall straw the system needs for the next mulch cycle. Barley undersown into Emmer bridges the harvest gap. Squash and Corn and Tomato close the summer canopy while the brassicas hold the winter ground. Crimson Clover overwinters into the following spring, the next pea phase already germinating behind it.</p>
+
+  <p>Nothing starts or stops. The sequence is the system.</p>
+
+  <div class="quick-ref">
+    <p class="section-head">Quick Reference</p>
+    <div class="quick-ref-item">Cowpea Clay <span>summer heat, nitrogen fixation, taproot compaction relief, weed smothering</span></div>
+    <div class="quick-ref-item">Crimson Clover <span>cool season nitrogen, erosion control, phosphorus scavenging</span></div>
+    <div class="quick-ref-item">Hidatsa Red Indian Bean <span>nitrogen fixation, drought tolerant, slope planting, heritage seed</span></div>
+    <div class="quick-ref-item">Iroquois Skunk Pole Bean <span>vigorous climber, nitrogen fixation, slope suppression</span></div>
+    <div class="quick-ref-item">1500 Year Old Cave Bean <span>nitrogen fixation, marginal soil adaptation, heritage lineage</span></div>
+    <div class="quick-ref-item">Soybean Tankuro <span>upright nitrogen fixation, high protein biomass</span></div>
+    <div class="quick-ref-item">Little Marvel Garden Pea <span>cool season nitrogen, harvest, rotation gap filler</span></div>
+    <div class="quick-ref-item">Emmer Farro <span>primary grain, clay tolerant, weed competitive straw, biochar feedstock</span></div>
+    <div class="quick-ref-item">Barley Black Hulless <span>relay grain, continuous ground cover, easy processing</span></div>
+    <div class="quick-ref-item">Corn Country Gentleman Sweet <span>three sisters vertical structure, nitrogen draw</span></div>
+    <div class="quick-ref-item">Sorghum Mennonite <span>allelopathic smother crop, biochar feedstock, grain, syrup</span></div>
+    <div class="quick-ref-item">Ayote Green Flesh Squash <span>canopy suppression, drought tolerant, seed saving</span></div>
+    <div class="quick-ref-item">Long de Nice Squash <span>canopy suppression, extended harvest window, seed saving</span></div>
+    <div class="quick-ref-item">Heirloom Cutting Mix Lettuce <span>cool season gap cover, repeated harvest, weed shading</span></div>
+    <div class="quick-ref-item">Black Cherry Tomato <span>canopy suppression, tomatine weed inhibition, clay structure</span></div>
+    <div class="quick-ref-item">Sunrise Bumble Bee Tomato <span>canopy suppression, genetic diversity in seed saving</span></div>
+    <div class="quick-ref-item">Romanesco Italia Cauliflower <span>biodrilling compaction, mineral extraction, winter harvest</span></div>
+    <div class="quick-ref-item">Kale Blue Curled Scotch <span>winter ground cover, root activity, biomass on bolt</span></div>
+  </div>
+
+  <a class="back-link" href="/">Back to Liminaut</a>
+
+</div>
+
+<footer>
+  <a class="footer-email" href="mailto:technodruid@liminaut.dev">technodruid@liminaut.dev</a>
+  <p class="footer-mark">LIMINAUT &nbsp;·&nbsp; <span>Built at the threshold.</span></p>
+</footer>
+
+</body>
+</html>
