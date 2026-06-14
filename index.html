@@ -100,7 +100,6 @@ nav {
 
 .nav-links a:hover { color: var(--lumen); }
 
-/* HERO */
 .site-hero {
   min-height: 100vh;
   display: flex;
@@ -109,10 +108,39 @@ nav {
   text-align: center;
   padding: 8rem 2rem 7rem;
   position: relative;
-  z-index: 1;
+  background-image: url('https://images.unsplash.com/photo-1597517697687-acc0c17b2603?w=1400&auto=format&fit=crop&q=80');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 
-.site-hero-inner { max-width: 780px; }
+.site-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(6,10,6,0.82) 0%,
+    rgba(6,10,6,0.55) 40%,
+    rgba(6,10,6,0.88) 100%
+  );
+}
+
+.site-hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(to bottom, transparent, var(--void));
+}
+
+.site-hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 780px;
+}
 
 .hero-eyebrow {
   font-family: var(--mono);
@@ -136,7 +164,8 @@ nav {
   font-weight: 300;
   font-size: clamp(1.7rem, 3.8vw, 2.6rem);
   line-height: 1.5;
-  color: var(--text);
+  color: #f0ede4;
+  text-shadow: 0 2px 30px rgba(0,0,0,0.9);
 }
 
 .hero-thesis em {
@@ -153,7 +182,6 @@ nav {
   text-transform: uppercase;
 }
 
-/* DIVIDER */
 .divider {
   width: 100%;
   height: 1px;
@@ -162,7 +190,6 @@ nav {
   z-index: 1;
 }
 
-/* SECTION HERO */
 .section-hero {
   width: 100%;
   height: 380px;
@@ -181,9 +208,9 @@ nav {
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(6,10,6,0.72) 0%,
-    rgba(6,10,6,0.35) 40%,
-    rgba(6,10,6,0.72) 100%
+    rgba(6,10,6,0.85) 0%,
+    rgba(6,10,6,0.45) 40%,
+    rgba(6,10,6,0.85) 100%
   );
 }
 
@@ -210,7 +237,7 @@ nav {
   font-size: 0.6rem;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: var(--text-faint);
+  color: var(--copper);
   margin-bottom: 0.9rem;
 }
 
@@ -218,27 +245,33 @@ nav {
   font-family: var(--serif);
   font-size: clamp(1.6rem, 3vw, 2.2rem);
   font-weight: 300;
-  color: var(--text);
+  color: #f0ede4;
   letter-spacing: 0.1em;
   margin-bottom: 0.7rem;
-  text-shadow: 0 2px 24px rgba(0,0,0,0.9);
+  text-shadow: 0 2px 30px rgba(0,0,0,1), 0 0 60px rgba(0,0,0,0.9);
 }
 
 .section-hero .hero-caption {
   font-family: var(--serif);
   font-style: italic;
-  color: var(--text-dim);
+  color: #c8d4b8;
   font-size: 1rem;
-  text-shadow: 0 1px 12px rgba(0,0,0,0.9);
+  text-shadow: 0 1px 16px rgba(0,0,0,1), 0 0 40px rgba(0,0,0,0.9);
 }
 
-/* SECTION CONTENT */
 .section-content {
-  max-width: 740px;
-  margin: 0 auto;
+  max-width: 640px;
   padding: 4rem 2rem 3rem;
   position: relative;
   z-index: 1;
+}
+
+.section-content.left {
+  margin: 0 auto 0 8%;
+}
+
+.section-content.right {
+  margin: 0 8% 0 auto;
 }
 
 .section-label {
@@ -260,11 +293,10 @@ nav {
   background: var(--border);
 }
 
-.section-content p {
+.section-content p.body {
   color: var(--text-dim);
   font-size: 1rem;
   line-height: 1.9;
-  margin-bottom: 0;
 }
 
 .enter-link {
@@ -286,7 +318,6 @@ nav {
   color: var(--lumen);
 }
 
-/* PROGRESS */
 .progress-wrap {
   position: relative;
   z-index: 1;
@@ -322,7 +353,6 @@ nav {
   color: var(--copper);
 }
 
-/* FOOTER */
 footer {
   position: relative;
   z-index: 1;
@@ -355,9 +385,14 @@ footer {
 
 @media (max-width: 600px) {
   .nav-links { display: none; }
+  .site-hero { background-attachment: scroll; }
   .section-hero { background-attachment: scroll; height: 280px; }
   .site-hero { padding: 6rem 1.2rem 5rem; }
   .section-content { padding: 3rem 1.2rem 2rem; }
+  .section-content.left,
+  .section-content.right {
+    margin: 0 auto;
+  }
 }
 </style>
 </head>
@@ -388,7 +423,6 @@ footer {
 
 <div class="divider"></div>
 
-<!-- PLANTS -->
 <div id="plants" class="section-hero" style="background-image: url('https://images.unsplash.com/photo-1589984348434-904066a3af4b?q=80&w=1174&auto=format&fit=crop')">
   <div class="section-hero-inner">
     <span class="section-num">I · Plants</span>
@@ -397,15 +431,14 @@ footer {
   </div>
 </div>
 
-<div class="section-content">
+<div class="section-content left">
   <p class="section-label">Plants</p>
-  <p>A seed carries the accumulated signal of every season its lineage survived in that specific soil, that specific climate, that specific pressure. Domestication optimized for yield and removed the redundancy that made plants locally adaptive. Open pollinated and heritage varieties still carry that full range. Seed saving closes the loop — the plant that performed best in your conditions produces the seed for next season. Companion planting, relay cropping, plants chosen for what the land is already doing rather than what a catalog recommends. The garden that works with its site builds capacity over time. The one optimized for output borrows against it.</p>
+  <p class="body">A seed carries the accumulated signal of every season its lineage survived in that specific soil, that specific climate, that specific pressure. Domestication optimized for yield and removed the redundancy that made plants locally adaptive. Open pollinated and heritage varieties still carry that full range. Seed saving closes the loop — the plant that performed best in your conditions produces the seed for next season. Companion planting, relay cropping, plants chosen for what the land is already doing rather than what a catalog recommends. The garden that works with its site builds capacity over time. The one optimized for output borrows against it.</p>
   <a class="enter-link" href="/plants">Enter →</a>
 </div>
 
 <div class="divider"></div>
 
-<!-- WATER -->
 <div id="water" class="section-hero" style="background-image: url('https://images.unsplash.com/photo-1527066236128-2ff79f7b9705?q=80&w=1176&auto=format&fit=crop')">
   <div class="section-hero-inner">
     <span class="section-num">II · Water</span>
@@ -414,15 +447,14 @@ footer {
   </div>
 </div>
 
-<div class="section-content">
+<div class="section-content right">
   <p class="section-label">Water</p>
-  <p>Water moving in a straight line loses dissolved oxygen, warms, and stratifies. A vortex suspends oxygen through the water column, keeps temperature stable through turbulent mixing, and maintains the biological activity that straight flow collapses. Schauberger documented this in mountain streams for decades before fluid dynamics caught up with the observation. Nitrates from a cycled aquarium carry the end product of a complete nitrogen cycle directly to plant roots. Dynamizing restores the spiral motion that pipe infrastructure removes. The constraint was the pipe. The vortex was always what water does when you stop directing it.</p>
+  <p class="body">Water moving in a straight line loses dissolved oxygen, warms, and stratifies. A vortex suspends oxygen through the water column, keeps temperature stable through turbulent mixing, and maintains the biological activity that straight flow collapses. Schauberger documented this in mountain streams for decades before fluid dynamics caught up with the observation. Nitrates from a cycled aquarium carry the end product of a complete nitrogen cycle directly to plant roots. Dynamizing restores the spiral motion that pipe infrastructure removes. The constraint was the pipe. The vortex was always what water does when you stop directing it.</p>
   <a class="enter-link" href="/water">Enter →</a>
 </div>
 
 <div class="divider"></div>
 
-<!-- SOIL -->
 <div id="soil" class="section-hero" style="background-image: url('https://images.pexels.com/photos/12940879/pexels-photo-12940879.jpeg')">
   <div class="section-hero-inner">
     <span class="section-num">III · Soil</span>
@@ -431,15 +463,14 @@ footer {
   </div>
 </div>
 
-<div class="section-content">
+<div class="section-content left">
   <p class="section-label">Soil</p>
-  <p>Soil is not a medium. It is a system with memory. Bacterial communities shift in response to what grows above them. Mycelium networks transfer carbon and phosphorus between root systems across distances no single plant manages alone. Biochar creates stable pore architecture that persists through seasons. The rotation matters because the soil remembers the last crop and adjusts. Work against the chemistry and you spend energy fighting a system that has been running longer than agriculture. Read what's already growing and the soil tells you what it's been doing.</p>
+  <p class="body">Soil is not a medium. It is a system with memory. Bacterial communities shift in response to what grows above them. Mycelium networks transfer carbon and phosphorus between root systems across distances no single plant manages alone. Biochar creates stable pore architecture that persists through seasons. The rotation matters because the soil remembers the last crop and adjusts. Work against the chemistry and you spend energy fighting a system that has been running longer than agriculture. Read what's already growing and the soil tells you what it's been doing.</p>
   <a class="enter-link" href="/soil">Enter →</a>
 </div>
 
 <div class="divider"></div>
 
-<!-- NEURONS -->
 <div id="neurons" class="section-hero" style="background-image: url('https://images.unsplash.com/photo-1716833322990-acbeae5cc3eb?q=80&w=1329&auto=format&fit=crop')">
   <div class="section-hero-inner">
     <span class="section-num">IV · Neurons</span>
@@ -448,15 +479,14 @@ footer {
   </div>
 </div>
 
-<div class="section-content">
+<div class="section-content right">
   <p class="section-label">Neurons</p>
-  <p>A digital simulation models the threshold crossing. An analog circuit built from discrete components instantiates it — the physics isn't approximated, it happens. The noise in a salvaged op-amp isn't an error to correct, it's the biological variance that computational neuroscience spends considerable effort reintroducing artificially. The imprecision of cheap parts turns out to be the range real neurons operate in. The limit was always the point. Spike-timing dependent plasticity, memory as physical change in a synapse, emergence from simple threshold elements — built from salvaged and surplus components figured out in real time.</p>
+  <p class="body">A digital simulation models the threshold crossing. An analog circuit built from discrete components instantiates it — the physics isn't approximated, it happens. The noise in a salvaged op-amp isn't an error to correct, it's the biological variance that computational neuroscience spends considerable effort reintroducing artificially. The imprecision of cheap parts turns out to be the range real neurons operate in. The limit was always the point. Spike-timing dependent plasticity, memory as physical change in a synapse, emergence from simple threshold elements — built from salvaged and surplus components figured out in real time.</p>
   <a class="enter-link" href="/neurons">Enter →</a>
 </div>
 
 <div class="divider"></div>
 
-<!-- COMPUTERS -->
 <div id="computers" class="section-hero" style="background-image: url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1334&auto=format&fit=crop')">
   <div class="section-hero-inner">
     <span class="section-num">V · Computers</span>
@@ -465,15 +495,14 @@ footer {
   </div>
 </div>
 
-<div class="section-content">
+<div class="section-content left">
   <p class="section-label">Computers</p>
-  <p>Older hardware runs warm and slow by current benchmarks. 1-bit quantized models like BitNet b1.58 perform near full precision at a fraction of the memory and compute — the constraint becomes the fit. Waste heat from the processor loop routes into heating and cooling solutions rather than exhausting into nothing. Parts chosen for repairability and supply chain transparency over performance scores. LoRa mesh radio for communication that doesn't depend on cellular infrastructure. The limits were always load-bearing. You just have to build around them honestly.</p>
+  <p class="body">Older hardware runs warm and slow by current benchmarks. 1-bit quantized models like BitNet b1.58 perform near full precision at a fraction of the memory and compute — the constraint becomes the fit. Waste heat from the processor loop routes into heating and cooling solutions rather than exhausting into nothing. Parts chosen for repairability and supply chain transparency over performance scores. LoRa mesh radio for communication that doesn't depend on cellular infrastructure. The limits were always load-bearing. You just have to build around them honestly.</p>
   <a class="enter-link" href="/computers">Enter →</a>
 </div>
 
 <div class="divider"></div>
 
-<!-- THRESHOLD -->
 <div id="threshold" class="section-hero" style="background-image: url('https://images.unsplash.com/photo-1576290134419-915a21939122?q=80&w=1170&auto=format&fit=crop')">
   <div class="section-hero-inner">
     <span class="section-num">VI · Threshold</span>
@@ -482,9 +511,9 @@ footer {
   </div>
 </div>
 
-<div class="section-content">
+<div class="section-content right">
   <p class="section-label">Threshold</p>
-  <p>Scale changes. Substrate changes. The dynamic doesn't. A silicon junction, a firing neuron, a seed reading its soil, a vortex finding its direction — the threshold event is the same gesture repeated across every system that has ever learned anything. Alchemists called it solve et coagula. Neuroscientists call it spike initiation. Farmers call it knowing when to plant. Different languages for the moment a system crosses from one state into another and can't go back. That crossing is what this site keeps returning to.</p>
+  <p class="body">Scale changes. Substrate changes. The dynamic doesn't. A silicon junction, a firing neuron, a seed reading its soil, a vortex finding its direction — the threshold event is the same gesture repeated across every system that has ever learned anything. Alchemists called it solve et coagula. Neuroscientists call it spike initiation. Farmers call it knowing when to plant. Different languages for the moment a system crosses from one state into another and can't go back. That crossing is what this site keeps returning to.</p>
   <a class="enter-link" href="/threshold">Enter →</a>
 </div>
 
